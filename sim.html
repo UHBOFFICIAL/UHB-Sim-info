@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>SIM DATABASE BY UNKNOWN HACKER BOY</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: #000;
+      color: #fff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      min-height: 100vh;
+      padding: 30px 15px;
+    }
+
+    h1 {
+      color: #00fff7;
+      text-shadow: 0 0 10px #00fff7;
+      margin-bottom: 20px;
+      font-size: 24px;
+      text-align: center;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 420px;
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 15px;
+      padding: 20px;
+      box-shadow: 0 0 20px rgba(0,255,247,0.15);
+    }
+
+    input, button {
+      width: 100%;
+      padding: 12px;
+      font-size: 15px;
+      margin-top: 10px;
+      border-radius: 8px;
+      border: none;
+    }
+
+    input {
+      background: #111;
+      color: white;
+      outline: none;
+    }
+
+    button {
+      background: linear-gradient(90deg, #00fff7, #4facfe);
+      color: #000;
+      font-weight: bold;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    button:hover {
+      background: linear-gradient(90deg, #4facfe, #00fff7);
+    }
+
+    .response-box {
+      margin-top: 15px;
+      padding: 15px;
+      background: rgba(255,255,255,0.1);
+      border-radius: 10px;
+      font-size: 14px;
+      color: white;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 10px;
+      font-size: 13px;
+    }
+
+    th, td {
+      border: 1px solid #00fff7;
+      padding: 6px;
+      text-align: center;
+    }
+
+    th {
+      background: #00fff7;
+      color: black;
+    }
+
+    td {
+      background: #111;
+      color: white;
+    }
+
+    .whatsapp-buttons {
+      margin-top: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .whatsapp-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      padding: 12px;
+      background: linear-gradient(90deg, #25D366, #128C7E);
+      border: none;
+      border-radius: 10px;
+      color: white;
+      font-weight: bold;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .whatsapp-btn:hover {
+      background: linear-gradient(90deg, #128C7E, #25D366);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(18, 140, 126, 0.5);
+    }
+
+    .wa-icon {
+      width: 20px;
+      height: 20px;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>SIM DATABASE by UNKNOWN HACKER BOY</h1>
+
+  <div class="container">
+    <input type="text" id="number" placeholder="Enter phone number">
+    <button onclick="fetchData()">Search</button>
+
+    <div id="responseBox" class="response-box"></div>
+
+    <div class="whatsapp-buttons">
+      <a href="https://wa.me/923348734337" target="_blank">
+        <button class="whatsapp-btn">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" class="wa-icon">
+          Chat on WhatsApp
+        </button>
+      </a>
+
+      <a href="https://whatsapp.com/channel/0029VaskVOHBqbr0Rzvg1Z2b" target="_blank">
+        <button class="whatsapp-btn">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" class="wa-icon">
+          Join Our Channel
+        </button>
+      </a>
+    </div>
+  </div>
+
+  <script>
+    async function fetchData() {
+      const number = document.getElementById("number").value.trim();
+      const box = document.getElementById("responseBox");
+      box.innerHTML = "<p>⏳ Fetching data...</p>";
+
+      if (!number) {
+        alert("Please enter a number.");
+        return;
+      }
+
+      const url = `https://api.allorigins.win/get?url=${encodeURIComponent('https://famofcfallxd.serv00.net/apis/simdataapi.php?num=' + number)}`;
+
+      try {
+        const res = await fetch(url);
+        const result = await res.json();
+        const data = JSON.parse(result.contents);
+
+        if (data.status === "success" && data.data.length > 0) {
+          let table = `
+            <table>
+              <thead>
+                <tr>
+                  <th>Name</th>
+                  <th>Mobile</th>
+                  <th>CNIC</th>
+                  <th>Operator</th>
+                  <th>Address</th>
+                </tr>
+              </thead>
+              <tbody>
+          `;
+          data.data.forEach(user => {
+            table += `
+              <tr>
+                <td>${user.Name || 'N/A'}</td>
+                <td>${user.Mobile || 'N/A'}</td>
+                <td>${user.CNIC || 'N/A'}</td>
+                <td>${user.Operator || 'N/A'}</td>
+                <td>${user.Address || 'N/A'}</td>
+              </tr>`;
+          });
+          table += `</tbody></table>`;
+          box.innerHTML = table;
+        } else {
+          box.innerHTML = "<p>❌ No data found for this number.</p>";
+        }
+      } catch (err) {
+        box.innerHTML = `<p style="color:red;">❌ Error: ${err.message}</p>`;
+      }
+    }
+  </script>
+</body>
+</html>
+
